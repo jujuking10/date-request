@@ -24,15 +24,12 @@ body{
     padding:40px;
     border-radius:20px;
     backdrop-filter:blur(10px);
+    width:90%;
+    max-width:400px;
 }
 
-h1{
-    font-size:2.5rem;
-}
-
-p{
-    font-size:1.2rem;
-}
+h1{ font-size:2.5rem; }
+p{ font-size:1.2rem; }
 
 button{
     padding:12px 25px;
@@ -43,20 +40,24 @@ button{
     margin:10px;
 }
 
-#yes{
-    background:#22c55e;
-    color:white;
-}
+#yes{ background:#22c55e; color:white; }
+#no{ background:#ef4444; color:white; }
 
-#no{
-    background:#ef4444;
-    color:white;
+select{
+    padding:10px;
+    border-radius:10px;
+    margin-top:10px;
+    width:100%;
 }
 
 #result{
     margin-top:20px;
-    font-size:22px;
+    font-size:20px;
     font-weight:bold;
+}
+
+.hidden{
+    display:none;
 }
 </style>
 </head>
@@ -78,6 +79,34 @@ but I still need your approval for this request.
 
 <button id="yes" onclick="yesClick()">Yes ❤️</button>
 <button id="no">No 😢</button>
+
+<!-- Choices (hidden at first) -->
+<div id="choices" class="hidden">
+    <h3>Pick your perfect date 💖</h3>
+
+    <label>Type of Date:</label><br>
+    <select id="dateType">
+        <option value="Romantic Dinner">Romantic Dinner 🍷</option>
+        <option value="Movie Night">Movie Night 🎬</option>
+        <option value="Adventure">Adventure 🌄</option>
+        <option value="Coffee Date">Coffee Date ☕</option>
+        <option value="Chill Hangout">Chill Hangout 🛋️</option>
+    </select>
+
+    <br><br>
+
+    <label>Food Choice:</label><br>
+    <select id="food">
+        <option value="Italian">Italian 🍝</option>
+        <option value="Korean BBQ">Korean BBQ 🥩</option>
+        <option value="Japanese">Japanese 🍣</option>
+        <option value="Fast Food">Fast Food 🍔</option>
+        <option value="Dessert Date">Dessert Date 🍰</option>
+    </select>
+
+    <br><br>
+    <button onclick="confirmDate()">Confirm 💕</button>
+</div>
 
 <div id="result"></div>
 
@@ -106,9 +135,22 @@ noBtn.addEventListener("mouseover", () => {
 });
 
 function yesClick(){
+    document.getElementById("choices").classList.remove("hidden");
     document.getElementById("result").innerHTML =
-    "🎉 Request Approved! Date scheduled successfully ❤️";
+    "Yay! Now customize our date ❤️";
 }
+
+function confirmDate(){
+    const dateType = document.getElementById("dateType").value;
+    const food = document.getElementById("food").value;
+
+    document.getElementById("result").innerHTML =
+    `🎉 Date Confirmed! ❤️ <br>
+     Plan: <b>${dateType}</b> <br>
+     Food: <b>${food}</b> <br><br>
+     Can't wait! 🥰`;
+}
+
 </script>
 
 </body>
