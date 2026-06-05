@@ -1,28 +1,42 @@
-const noBtn = document.getElementById("no");
-const yesBtn = document.getElementById("yes");
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Request ❤️</title>
 
-let scale = 1;
-let activated = false; // track if movement started
-
-noBtn.addEventListener("mouseover", () => {
-
-    // Grow Yes button
-    scale += 0.1;
-    yesBtn.style.transform = `scale(${scale})`;
-
-    // Activate runaway mode only after first hover
-    if (!activated) {
-        noBtn.style.position = "absolute";
-        activated = true;
-    }
-
-    moveNo();
-});
-
-function moveNo(){
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 50);
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
 }
+
+.card{
+    text-align:center;
+    background:rgba(255,255,255,0.08);
+    padding:40px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    width:90%;
+    max-width:400px;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:18px;
+    margin:10px;
+}
+
+#yes{
+    background:#22c55e;
+    color:white;
