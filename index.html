@@ -19,6 +19,7 @@ body{
 }
 
 .card{
+    position:relative;
     text-align:center;
     background:rgba(255,255,255,0.08);
     padding:40px;
@@ -27,9 +28,6 @@ body{
     width:90%;
     max-width:400px;
 }
-
-h1{ font-size:2.5rem; }
-p{ font-size:1.2rem; }
 
 button{
     padding:12px 25px;
@@ -41,7 +39,11 @@ button{
 }
 
 #yes{ background:#22c55e; color:white; }
-#no{ background:#ef4444; color:white; }
+#no{
+    background:#ef4444;
+    color:white;
+    position:absolute;
+}
 
 select{
     padding:10px;
@@ -80,28 +82,21 @@ but I still need your approval for this request.
 <button id="yes" onclick="yesClick()">Yes ❤️</button>
 <button id="no">No 😢</button>
 
-<!-- Choices (hidden at first) -->
 <div id="choices" class="hidden">
     <h3>Pick your perfect date 💖</h3>
 
-    <label>Type of Date:</label><br>
     <select id="dateType">
-        <option value="Romantic Dinner">Romantic Dinner 🍷</option>
-        <option value="Movie Night">Movie Night 🎬</option>
-        <option value="Adventure">Adventure 🌄</option>
-        <option value="Coffee Date">Coffee Date ☕</option>
-        <option value="Chill Hangout">Chill Hangout 🛋️</option>
+        <option>Romantic Dinner 🍷</option>
+        <option>Movie Night 🎬</option>
+        <option>Adventure 🌄</option>
+        <option>Coffee Date ☕</option>
     </select>
 
-    <br><br>
-
-    <label>Food Choice:</label><br>
     <select id="food">
-        <option value="Italian">Italian 🍝</option>
-        <option value="Korean BBQ">Korean BBQ 🥩</option>
-        <option value="Japanese">Japanese 🍣</option>
-        <option value="Fast Food">Fast Food 🍔</option>
-        <option value="Dessert Date">Dessert Date 🍰</option>
+        <option>Italian 🍝</option>
+        <option>Korean BBQ 🥩</option>
+        <option>Japanese 🍣</option>
+        <option>Burger 🍔</option>
     </select>
 
     <br><br>
@@ -115,29 +110,32 @@ but I still need your approval for this request.
 <script>
 
 const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
 let scale = 1;
+
+// Initial random position
+moveNo();
+
+function moveNo(){
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
 
 noBtn.addEventListener("mouseover", () => {
 
     scale += 0.1;
-    document.getElementById("yes").style.transform =
-        `scale(${scale})`;
+    yesBtn.style.transform = `scale(${scale})`;
 
-    const x = Math.random() *
-        (window.innerWidth - 100);
-
-    const y = Math.random() *
-        (window.innerHeight - 50);
-
-    noBtn.style.position = "absolute";
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    moveNo();
 });
 
 function yesClick(){
     document.getElementById("choices").classList.remove("hidden");
     document.getElementById("result").innerHTML =
-    "Yay! Now customize our date ❤️";
+    "Yay! Customize our date ❤️";
 }
 
 function confirmDate(){
@@ -145,10 +143,8 @@ function confirmDate(){
     const food = document.getElementById("food").value;
 
     document.getElementById("result").innerHTML =
-    `🎉 Date Confirmed! ❤️ <br>
-     Plan: <b>${dateType}</b> <br>
-     Food: <b>${food}</b> <br><br>
-     Can't wait! 🥰`;
+    `🎉 Date Confirmed ❤️<br>
+    ${dateType} + ${food} = Perfect! 🥰`;
 }
 
 </script>
