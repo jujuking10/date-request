@@ -1,23 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Date Request ❤️</title>
+
+<style>
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:linear-gradient(135deg,#0f172a,#1e293b);
+    color:white;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    overflow:hidden;
+}
+
+.card{
+    position:relative;
+    text-align:center;
+    background:rgba(255,255,255,0.08);
+    padding:40px;
+    border-radius:20px;
+    backdrop-filter:blur(10px);
+    width:90%;
+    max-width:400px;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:18px;
+    margin:10px;
+}
+
+#yes{ background:#22c55e; color:white; }
+#no{
+    background:#ef4444;
+    color:white;
+    position:absolute;
+}
+
+select{
+    padding:10px;
+    border-radius:10px;
+    margin-top:10px;
+    width:100%;
+}
+
+#result{
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.hidden{
+    display:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<h1>Hi Jen ❤️</h1>
+
+<p>
+As an IT guy, I can deploy servers,
+manage cloud infrastructure,
+and troubleshoot networks...
+but I still need your approval for this request.
+</p>
+
+<h2>Will you go on a date with me? 🥰</h2>
+
+<button id="yes" onclick="yesClick()">Yes ❤️</button>
+<button id="no">No 😢</button>
+
+<div id="choices" class="hidden">
+    <h3>Pick your perfect date 💖</h3>
+
+    <select id="dateType">
+        <option>Romantic Dinner 🍷</option>
+        <option>Movie Night 🎬</option>
+        <option>Ikea Shopping Date🌄</option>
+        <option>Coffee Date ☕</option>
+    </select>
+
+    <select id="food">
+        <option>Burger </option>
+        <option>Korean BBQ 🥩</option>
+        <option>Japanese 🍣</option>
+        <option>Indian </option>
+    </select>
+
+    <br><br>
+    <button onclick="confirmDate()">Confirm 💕</button>
+</div>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
 const noBtn = document.getElementById("no");
 const yesBtn = document.getElementById("yes");
-
 let scale = 1;
-let activated = false; // track if movement started
 
-noBtn.addEventListener("mouseover", () => {
-
-    // Grow Yes button
-    scale += 0.1;
-    yesBtn.style.transform = `scale(${scale})`;
-
-    // Activate runaway mode only after first hover
-    if (!activated) {
-        noBtn.style.position = "absolute";
-        activated = true;
-    }
-
-    moveNo();
-});
+// Initial random position
+moveNo();
 
 function moveNo(){
     const x = Math.random() * (window.innerWidth - 100);
@@ -26,3 +123,45 @@ function moveNo(){
     noBtn.style.left = x + "px";
     noBtn.style.top = y + "px";
 }
+let scale = 1;
+let activated = false; // track if movement started
+
+noBtn.addEventListener("mouseover", () => {
+
+    // Grow Yes button
+scale += 0.1;
+yesBtn.style.transform = `scale(${scale})`;
+
+    // Activate runaway mode only after first hover
+    if (!activated) {
+        noBtn.style.position = "absolute";
+        activated = true;
+    }
+
+moveNo();
+});
+
+function yesClick(){
+    document.getElementById("choices").classList.remove("hidden");
+    document.getElementById("result").innerHTML =
+    "Yay! Customize our date ❤️";
+}
+
+function confirmDate(){
+    const dateType = document.getElementById("dateType").value;
+    const food = document.getElementById("food").value;
+function moveNo(){
+    const x = Math.random() * (window.innerWidth - 100);
+    const y = Math.random() * (window.innerHeight - 50);
+
+    document.getElementById("result").innerHTML =
+    `🎉 Date Confirmed ❤️<br>
+    ${dateType} + ${food} = Perfect! 🥰`;
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+</script>
+
+</body>
+</html>
